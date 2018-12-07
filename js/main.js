@@ -160,15 +160,16 @@ createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
   const image = document.createElement('img');
-  image.className = 'restaurant-img';
+  image.className = 'restaurant-img lazyload';
+  
   var imgurlbase = DBHelper.imageUrlForRestaurant(restaurant);
   var length_image = imgurlbase.length;
   imgurlbase = imgurlbase.substring(0, length_image-5);
   const imgurl1x = imgurlbase + "-500-small.jpeg";
   const imgurl2x = imgurlbase + "-750-medium.jpeg";
   const imgurl3x = imgurlbase+ ".jpeg";
-  image.src = imgurl1x;
-  image.srcset = `${imgurl1x} 320w, ${imgurl2x} 503w, ${imgurl3x} 900w`;
+  image.dataset.src = imgurl1x;
+  image.dataset.srcset = `${imgurl1x} 320w, ${imgurl2x} 503w, ${imgurl3x} 900w`;
   image.sizes = `(max-width: 503px) 320px, (max-width: 900px) 503px, 900px`;
   image.alt = restaurant.name + " restaurant marketing photograph";			
   

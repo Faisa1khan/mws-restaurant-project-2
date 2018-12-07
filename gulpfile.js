@@ -30,7 +30,7 @@ gulp.task('default', ['prod:serve']);
 gulp.task('prod:serve', gulpSequence('build','pwa-service-worker', 'browser-sync' ));
 
 // ===================== Production Build =====================
-gulp.task('build', gulpSequence('clean', 'scripts:prod', 'html:prod', 'styles:prod','copy:prod','webp:prod'));
+gulp.task('build', gulpSequence('clean', 'scripts:prod', 'html:prod', 'styles:prod','copy:prod','webp:prod','pwa-service-worker'));
 
 // Copy app contents to dist directory
 gulp.task('copy:prod', function () {

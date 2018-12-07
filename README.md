@@ -55,7 +55,10 @@ Make sure the [Node development server](https://github.com/udacity/mws-restauran
 
 Clone or download the repository.
 Start up an HTTP server, you can use Python or Chrome extension [Web Server for Chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en).
-TO USE THIS 
+
+TO USE THIS APP
+
+USE FOLLOWING COMMANDS IN YOUR TERMINAL  
 
 1 - npm install
 

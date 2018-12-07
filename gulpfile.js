@@ -20,14 +20,13 @@ var workboxBuild = require('workbox-build');
 var browserSync = require('browser-sync').create();
 
 
-var jsSrcMainList = ['js/idb.js', 'js/register.js', 'js/dbhelper.js', 'js/main.js' ];
-var jsSrcRestaurantList = ['js/dbhelper.js', 'js/restaurant_info.js'];
+
 
 // ===================== Default Task =====================
 gulp.task('default', ['prod:serve']);
 
 // ===================== Build & Serve Production Build =====================
-gulp.task('prod:serve', gulpSequence('build','pwa-service-worker', 'browser-sync' ));
+gulp.task('prod:serve', gulpSequence('build'));
 
 // ===================== Production Build =====================
 gulp.task('build', gulpSequence('clean', 'scripts:prod', 'html:prod', 'styles:prod','copy:prod','webp:prod','pwa-service-worker'));
@@ -124,13 +123,7 @@ gulp.task('scripts:prod', function () {
     
 
 
-    gulp.task('browser-sync', function() {
-        browserSync.init({
-            server: {
-                baseDir: "./dist"
-            }
-        });
-    });
+  
     
 
 

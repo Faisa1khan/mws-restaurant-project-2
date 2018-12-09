@@ -14,11 +14,10 @@ var gulpSequence = require('gulp-sequence');
 var htmlmin = require('gulp-htmlmin');
 var clean = require('gulp-clean');
 var minifyInline = require('gulp-minify-inline');
-const minifyJs = require('gulp-minify');
-const concatJs = require('gulp-concat');
 
+var gzipStatic = require('connect-gzip-static');
 var workboxBuild = require('workbox-build');
-
+var browserSync = require('browser-sync').create();
 
 
 
@@ -30,7 +29,7 @@ gulp.task('default', ['prod:serve']);
 gulp.task('prod:serve', gulpSequence('build'));
 
 // ===================== Production Build =====================
-gulp.task('build', gulpSequence('clean', 'concat-js', 'html:prod', 'styles:prod','copy:prod','webp:prod','pwa-service-worker'));
+gulp.task('build', gulpSequence('clean', 'scripts:prod', 'html:prod', 'styles:prod','copy:prod','webp:prod','pwa-service-worker'));
 
 // Copy app contents to dist directory
 gulp.task('copy:prod', function () {
@@ -110,50 +109,16 @@ gulp.task('styles:prod', function () {
         }))
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest('./dist/css'));
-
-        gulp.src('css/details.css')
-        .pipe(cleanCSS({
-            compatibility: 'ie8'
-        }))
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        .pipe(rename('details.min.css'))
-        .pipe(gulp.dest('./dist/css'));
-
-        gulp.src('css/common.css')
-        .pipe(cleanCSS({
-            compatibility: 'ie8'
-        }))
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        .pipe(rename('common.min.css'))
-        .pipe(gulp.dest('./dist/css'));
 });
-
 
 // ===================== Scripts =====================
 
 
-gulp.task('concat-js', function() {
-    gulp.src(['./js/review.js','./js/dbhelper.js','./js/idb.js'])
-    //.pipe(sourcemaps.init())
-    .pipe(concatJs('review.js'))
-    .pipe(minifyJs())
-    //.pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist/js'))
-  
-    gulp.src('./js/main.js')
-    .pipe(concatJs('main.js'))
-    .pipe(minifyJs())
-    .pipe(gulp.dest('dist/js'))
-  
-    gulp.src('./js/restaurant_info.js')
-    .pipe(concatJs('restaurant_info.js'))
-    .pipe(minifyJs())
-    .pipe(gulp.dest('dist/js'))
-  })
+gulp.task('scripts:prod', function () {
+    gulp.src('js/**.js')
+            .pipe(uglify())
+            .pipe(gulp.dest('./dist/js'));
+    });
 
     
 

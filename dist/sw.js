@@ -38,48 +38,40 @@ if (workbox) {
   // cache-first handler.
   workbox.precaching.precacheAndRoute([
   {
-    "url": "css/common.min.css",
-    "revision": "8903ebb35bd0fa4f797930ea76637e9b"
-  },
-  {
-    "url": "css/details.min.css",
-    "revision": "a2ddc1b340bfe781285ce707baae0a57"
-  },
-  {
     "url": "css/styles.min.css",
     "revision": "cc774edeab66b3bc189536a23e7ec52f"
   },
   {
     "url": "index.html",
-    "revision": "2ba3dad03bb19ef7e15113992e10fe62"
+    "revision": "6480d689122e88aa2da46baa3f964753"
   },
   {
-    "url": "js/main-min.js",
-    "revision": "c1b92cd17a2d421aff0c89067296b0c8"
+    "url": "js/dbhelper.js",
+    "revision": "e9b70fc05532078adfa037255f1f7842"
+  },
+  {
+    "url": "js/idb.js",
+    "revision": "ba7837a5246faa8d30d3d8c8cc38d978"
+  },
+  {
+    "url": "js/lazysizes.min.js",
+    "revision": "189955cddf8849b19c611252bee2ad5c"
   },
   {
     "url": "js/main.js",
-    "revision": "56827c6db15f627bf64bad01764fe83c"
+    "revision": "22836ec8c387b1e2552e121dd012a3f4"
   },
   {
-    "url": "js/restaurant_info-min.js",
-    "revision": "de10b513c7db8a01129cb59108ad7876"
+    "url": "js/register.js",
+    "revision": "1b93111fbcb792df5064bcf947483066"
   },
   {
     "url": "js/restaurant_info.js",
-    "revision": "8cbe294b5b4b2c728d11f1b873722c4b"
-  },
-  {
-    "url": "js/review-min.js",
-    "revision": "992c1eaf26bd6d3bfc5df04d9f87b8e6"
-  },
-  {
-    "url": "js/review.js",
-    "revision": "45f61fdd0e6d4e4684b94ed9c058cefc"
+    "revision": "a107935eac8938eba29c8cd727d704c7"
   },
   {
     "url": "restaurant.html",
-    "revision": "de5a63f5e6db99a3d897ebed71e7db2f"
+    "revision": "6f04929e287e103f3666e770aee95cf8"
   },
   {
     "url": "manifest.json",

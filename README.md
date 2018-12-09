@@ -69,3 +69,4 @@ USE FOLLOWING COMMANDS IN YOUR TERMINAL
 4- python3 -m http.server 8000
 
 NOW USE http://localhost:8000/ in incognito mode
+# mws-restaurant-project-3

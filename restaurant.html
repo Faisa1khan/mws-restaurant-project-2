@@ -1,76 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="Description" content="Author: Restaurant Reviews, Category: Food, Length: 2 pages">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Normalize.css for better cross-browser consistency -->
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-    <!-- Main CSS file -->
-    <link rel="stylesheet" media="leaflet" onload="this.media='all'" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-      integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
-    <link rel="stylesheet" media="styles" href="css/styles.min.css" onload="this.media='all'">
-    <title>Restaurant Info</title>
-  </head>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252831"/>
+  <link rel="manifest" href="/manifest.json">
+  <!-- Main CSS file -->
+  <link rel="stylesheet" href="css/common.min.css" type="text/css">
+  <link rel="stylesheet" href="css/details.min.css" type="text/css">
+  <title>Restaurant Info</title>
+</head>
 
 <body class="inside">
   <!-- Beginning header -->
-  <header tabindex="0">
+  <header>
     <!-- Beginning nav -->
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
+      <h3 id="offline-msg" role="alert">Offline</h3>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" role="breadcrumb" aria-label="breadcrumb">
-      <li><a href="/">Home</a></li>
-    </ul>
+    <nav aria-label="Breadcrumb">
+      <ul id="breadcrumb" role="navigation">
+          <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
   <!-- End header -->
 
   <!-- Beginning main -->
-  <main id="maincontent" tabindex="0">
+  <main id="maincontent" >
     <!-- Beginning map -->
-    <section id="map-container">
+    <section id="map-container" aria-hidden="true">
       <div id="map" role="application" aria-label="map for locating restaurants, please use arrow keys to move the map accordingly"></div>
     </section>
     <!-- End map -->
     <!-- Beginning restaurant -->
-    <section id="restaurant-container" tabindex="0">
-      <h1 id="restaurant-name"></h1>
-      <img id="restaurant-img">
-      <p id="restaurant-cuisine"></p>
-      <span id="restaurant-time"><p id="restaurant-address"></p>
-      <table id="restaurant-hours"></table></span>
+    <section id="restaurant-container">
+
+          <h2 id="restaurant-name"></h2>
+          <label style="float:right"><img id="myFavouriteImage" alt="Favorite image" src=""  onclick="click_toggleFavourite();" style="width:35px ; cursor:pointer">
+          </label> 
+ 
+     <br/> <br/>
+    
+    <img id="restaurant-img">
+        </img>
+      <p id="restaurant-cuisine" tabindex="0"></p>
+      <address id="restaurant-address" tabindex="0"></address>
+      <table id="restaurant-hours" tabindex="0"></table>
+      
     </section>
     <!-- end restaurant -->
     <!-- Beginning reviews -->
-    <section id="reviews-container" tabindex="0">
+    <section id="reviews-container">
+        <h2>Reviews<a href="#add-review-container" style="
+          padding-left: 1em;
+          font-family: Arial,Helvetica,sans-serif;
+          font-style: italic;
+          font-size: 18pt;
+          color: #00f;
+          /* font-weight: 700; */
+      ">(Click here to write review) </a></h2>
       <ul id="reviews-list"></ul>
+    </section>
+    <section id="add-review-container">
+        <h4 style="font-size: 17pt;">What is your review about this restaurant ?</h4>
+      <form id="add-review-form">
+        <input type="hidden" name="restaurant_id" id="restaurant_id" value="" />
+        <label>
+          Name
+            <input type="text" name="name" required/>
+        </label>
+        <label>
+          Rating
+            <input type="number" name="rating" min="0" max="5" required/>
+        </label>
+        <label>
+          Comment
+            <textarea name="comments" required></textarea>
+        </label>
+        <button type="submit">Send</button>
+
+
+      </form>
     </section>
     <!-- End reviews -->
   </main>
   <!-- End main -->
 
   <!-- Beginning footer -->
-  <footer id="footer" tabindex="0">
-    Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+  <footer id="footer">
+    Copyright (c) 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
   <!-- End footer -->
-  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-  <!-- Beginning scripts -->
-  <!-- Database helpers -->
-  <script src="js/lazysizes.min.js" async=""></script>
-  <script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
-  <script type="text/javascript" src="js/dbhelper.js"></script>
-  <!-- Main javascript file -->
-  <script type="text/javascript" src="js/restaurant_info.js"></script>
-  <script src="js/register.js"></script>
-  <!-- Google Maps -->
- <!--  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_tKbW6A5pQ-eupxI56myUnHLqYCzOjKo&libraries=places&callback=initMap"></script> -->
-  <!-- End scripts -->
 
+  <!-- Beginning scripts -->
+
+  <script>
+    /* Set up service worker */
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('/sw.js')
+             .then(function() { console.log("Service Worker Registered"); });
+  }
+  
+  </script>
+  
+
+  <!-- Main javascript file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.5/lazysizes.min.js" async=""></script>
+  <script type="application/javascript" charset="utf-8" src="js/review-min.js"></script>
+  <script type="application/javascript" charset="utf-8" src="js/restaurant_info-min.js"></script>
+
+ <!-- Google Maps -->
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHRveLvGdeUOBzYYgBsWveeAogtOW8I7k&libraries=places&callback=initMap"></script>
+ <!-- End scripts -->
 </body>
 
 </html>
+
+ 
+ 
+ 
+ 
+
